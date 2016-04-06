@@ -1,0 +1,19 @@
+Data-Encryption-Standard-Algorithm Implementation
+
+Este programa provee una forma de implementar el algoritmo de encriptación DES utilizando las librerias estándar de python3. Esta codificado como un programa secuencial(por ahora) pero las funciones y procedimientos ayudan a completar cada uno de los pasos que permiten las 16 rondas de Feistel, la generación de las 16 subclaves de 48 bits a partir de la clave de 64 bits utilizada al iniciar el algoritmo.
+El programa puede realizar la encriptación si el bloque que inicia con el comentario #ENCRIPTAR se deja sin comentar y se comenta el bloque #DESENCRIPTAR. También puede desencriptar si el bloque que inicia con el comentario #DESENCRIPTAR se deja sin comentar y se comenta el bloque #ENCRIPTAR.
+
+This program provides a way of implementing DES algorithm in python3 without use of framework/library outside Python standard libraries. The program provides all functionality for each of the 16 Feistel rounds, generation of the 16 48-bits subkeys and finally crypting /decrypting plain/crypted text respectively.
+
+
+La implementación fue hecha de acuerdo a la siguiente referencia:
+The implementation of the algorithm was made basing the following reference:
+
+HANDBOOK of APPLIED CRYPTOGRAPHY CH 7.4
+Alfred J. Menezes
+Paul C. van Oorschot
+Scott A. Vanstone
+
+Contact:
+Miguel Ángel Padilla Alonso
+angel.padilla@alumno.udg.mx
