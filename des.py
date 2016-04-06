@@ -1,4 +1,26 @@
 #!/bin/python3
+
+'''
+    This program provide a way of implementing DES algorithm in python3
+    without framework outside standard libraries. The program provides
+    all functionality for each of 16 Feistel rounds,16 48-bits subkeys
+    generation and finally crypt/decrypt plain/crypted text respectively. 
+    Copyright (C) <2016>  Man-gel
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
+
 TAM_BLQ=64
 N_RONDAS=16
 
