@@ -413,7 +413,6 @@ while m != '-9999':
     print(" Ki len: ",len(keys))
     m=input("Ingrese un mensaje [Salir = -9999]: ")
 
-'C0999FDDE378D7ED727DA00BCA5A84EE47F269A4D6438190D9D52F78F5358499828AC9B453E0E653'
 '''
 ###
 ##DESENCRIPTAR
@@ -427,7 +426,7 @@ while len(kHex) != 16:
 k2 = keyHextoBin(kHex)
 keys2 = calcularClaves(k2)
 print(" Ki len: ",len(keys2))
-m=input("Ingrese un mensaje en hexadecimal [Salir = -9999]: ") #'3fa40e8a984d48156a271787ab8883f9893d51ec4b563b53'
+m=input("Ingrese un mensaje en hexadecimal [Salir = -9999]: ")
 while m != '-9999':
     mDes = []
     mbin = []
