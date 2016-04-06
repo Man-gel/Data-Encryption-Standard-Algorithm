@@ -1,7 +1,7 @@
 #!/bin/python3
 
 '''
-    This program provide a way of implementing DES algorithm in python3
+    This program provides a way of implementing DES algorithm in python3
     without framework outside standard libraries. The program provides
     all functionality for each of 16 Feistel rounds,16 48-bits subkeys
     generation and finally crypt/decrypt plain/crypted text respectively. 
