@@ -22,7 +22,7 @@ Donde:
 ##########################################################################
 This program provides a way of implementing DES algorithm in python3 without use of framework/library outside Python standard libraries. The code provides all functionality for each of the 16 Feistel rounds, generation of the 16 48-bits subkeys and finally crypting /decrypting plain/crypted text respectively.
 
-If you want to use it in your project only must to copy des.py file in your project's folder and then create an object of 'des' class to can access to its 3 useful functions like follows:
+If you want to use it in your project only must to copy des.py file in your project's folder and then create an object of 'des' class to get access to its 3 useful functions like follows:
 
     #!/usr/bin/python3
 
@@ -32,7 +32,7 @@ If you want to use it in your project only must to copy des.py file in your proj
     dMsg = d.decrypt(cMsg,k[1])
 
 Where:
-'d' is a reference to a created object, 'k' is a tuple with 2 values: k[0] is the 'word'(or password) passed as argument to genKeys() function but switched to hex representation (it is only for purpose of sharing, so is in hex format but it isn't crypted), k[1] is a list with 16 48-bits subkeys; 'cMsg' is the returned value of crypt() function and refers to the crypted message returned by DES algorithm. In the same way, dMsg is the returned value of decrypt() function and refers to the decrypted message returned by DES algorithm.
+'d' is a reference to a created object, 'k' is a tuple with 2 values: k[0] is the 'word'(or password) passed as argument to genKeys() function but switched to hex representation (it is only for purpose of sharing, so be careful, is in hex format but it isn't mean secure), k[1] is a list containing 16 48-bits subkeys; 'cMsg' is the returned value of crypt() function and refers to the crypted message returned by DES algorithm. In the same way, dMsg is the returned value of decrypt() function and refers to the decrypted message returned by DES algorithm.
 
 genKeys() takes one parameter: a string with length=8(plain-text) or length=16(in hex-format if you had used k[0] as sharing value).
 crypt() takes two parameters: plain-text message that will be crypted, a list of 16 48-bits subkeys (as a 16 strings list).
