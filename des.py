@@ -31,64 +31,64 @@ class des:
     N_RONDAS=16
     
     PC1_TABLA = { 0:56,  1:48,  2:40,  3:32,  4:24,  5:16,  6:8,   7:0,
-                      8:57,  9:49, 10:41, 11:33, 12:25, 13:17, 14:9,  15:1,
-                     16:58, 17:50, 18:42, 19:34, 20:26, 21:18, 22:10, 23:2,
-                     24:59, 25:51, 26:43, 27:35, 28:62, 29:54, 30:46, 31:38,
-                     32:30, 33:22, 34:14, 35:6,  36:61, 37:53, 38:45, 39:37,
-                     40:29, 41:21, 42:13, 43:5,  44:60, 45:52, 46:44, 47:36,
-                     48:28, 49:20, 50:12, 51:4,  52:27, 53:19, 54:11, 55:3  }
+                  8:57,  9:49, 10:41, 11:33, 12:25, 13:17, 14:9,  15:1,
+                 16:58, 17:50, 18:42, 19:34, 20:26, 21:18, 22:10, 23:2,
+                 24:59, 25:51, 26:43, 27:35, 28:62, 29:54, 30:46, 31:38,
+                 32:30, 33:22, 34:14, 35:6,  36:61, 37:53, 38:45, 39:37,
+                 40:29, 41:21, 42:13, 43:5,  44:60, 45:52, 46:44, 47:36,
+                 48:28, 49:20, 50:12, 51:4,  52:27, 53:19, 54:11, 55:3  }
     
     PC2_TABLA = { 0:13,  1:16,  2:10,  3:23,  4:0,   5:4,   6:2,   7:27,
-                     8:14,  9:5,  10:20, 11:9,  12:22, 13:18, 14:11, 15:3,
-                    16:25, 17:7,  18:15, 19:6,  20:26, 21:19, 22:12, 23:1,
-                    24:40, 25:51, 26:30, 27:36, 28:46, 29:54, 30:29, 31:39,
-                    32:50, 33:44, 34:32, 35:47, 36:43, 37:48, 38:38, 39:55,
-                    40:33, 41:52, 42:45, 43:41, 44:49, 45:35, 46:28, 47:31  }
+                  8:14,  9:5,  10:20, 11:9,  12:22, 13:18, 14:11, 15:3,
+                 16:25, 17:7,  18:15, 19:6,  20:26, 21:19, 22:12, 23:1,
+                 24:40, 25:51, 26:30, 27:36, 28:46, 29:54, 30:29, 31:39,
+                 32:50, 33:44, 34:32, 35:47, 36:43, 37:48, 38:38, 39:55,
+                 40:33, 41:52, 42:45, 43:41, 44:49, 45:35, 46:28, 47:31  }
     
     IP_TABLA={ 0:57,  1:49,  2:41,  3:33,  4:25,  5:17,  6:9,   7:1,
-                   8:59,  9:51, 10:43, 11:35, 12:27, 13:19, 14:11, 15:3,
-                  16:61, 17:53, 18:45, 19:37, 20:29, 21:21, 22:13, 23:5,
-                  24:63, 25:55, 26:47, 27:39, 28:31, 29:23, 30:15, 31:7,
-                  32:56, 33:48, 34:40, 35:32, 36:24, 37:16, 38:8,  39:0,
-                  40:58, 41:50, 42:42, 43:34, 44:26, 45:18, 46:10, 47:2,
-                  48:60, 49:52, 50:44, 51:36, 52:28, 53:20, 54:12, 55:4,
-                  56:62, 57:54, 58:46, 59:38, 60:30, 61:22, 62:14, 63:6 }
+               8:59,  9:51, 10:43, 11:35, 12:27, 13:19, 14:11, 15:3,
+              16:61, 17:53, 18:45, 19:37, 20:29, 21:21, 22:13, 23:5,
+              24:63, 25:55, 26:47, 27:39, 28:31, 29:23, 30:15, 31:7,
+              32:56, 33:48, 34:40, 35:32, 36:24, 37:16, 38:8,  39:0,
+              40:58, 41:50, 42:42, 43:34, 44:26, 45:18, 46:10, 47:2,
+              48:60, 49:52, 50:44, 51:36, 52:28, 53:20, 54:12, 55:4,
+              56:62, 57:54, 58:46, 59:38, 60:30, 61:22, 62:14, 63:6 }
     
     IP_INV_TABLA={ 0:39,  1:7,   2:47,  3:15,  4:55,  5:23,  6:63,  7:31,
-                       8:38,  9:6,  10:46, 11:14, 12:54, 13:22, 14:62, 15:30,
-                      16:37, 17:5,  18:45, 19:13, 20:53, 21:21, 22:61, 23:29,
-                      24:36, 25:4,  26:44, 27:12, 28:52, 29:20, 30:60, 31:28,
-                      32:35, 33:3,  34:43, 35:11, 36:51, 37:19, 38:59, 39:27,
-                      40:34, 41:2,  42:42, 43:10, 44:50, 45:18, 46:58, 47:26,
-                      48:33, 49:1,  50:41, 51:9,  52:49, 53:17, 54:57, 55:25,
-                      56:32, 57:0,  58:40, 59:8,  60:48, 61:16, 62:56, 63:24 }
+                   8:38,  9:6,  10:46, 11:14, 12:54, 13:22, 14:62, 15:30,
+                  16:37, 17:5,  18:45, 19:13, 20:53, 21:21, 22:61, 23:29,
+                  24:36, 25:4,  26:44, 27:12, 28:52, 29:20, 30:60, 31:28,
+                  32:35, 33:3,  34:43, 35:11, 36:51, 37:19, 38:59, 39:27,
+                  40:34, 41:2,  42:42, 43:10, 44:50, 45:18, 46:58, 47:26,
+                  48:33, 49:1,  50:41, 51:9,  52:49, 53:17, 54:57, 55:25,
+                  56:32, 57:0,  58:40, 59:8,  60:48, 61:16, 62:56, 63:24 }
     
     E_TABLA={3:4, 7:8, 11:12, 15:16, 19:20, 23:24, 27:28}
     
     S_BOX={   0:{ 0:(14,4,13,1,2,15,11,8,3,10,6,12,5,9,0,7),   #S_BOX 1
-                   1:(0,15,7,4,14,2,13,1,10,6,12,11,9,5,3,8),
-                   2:(4,1,14,8,13,6,2,11,15,12,9,7,3,10,5,0),
-                   3:(15,12,8,2,4,9,1,7,5,11,3,14,10,0,6,13) },     
+                  1:(0,15,7,4,14,2,13,1,10,6,12,11,9,5,3,8),
+                  2:(4,1,14,8,13,6,2,11,15,12,9,7,3,10,5,0),
+                  3:(15,12,8,2,4,9,1,7,5,11,3,14,10,0,6,13) },     
     
-               6:{ 0:(15,1,8,14,6,11,3,4,9,7,2,13,12,0,5,10),   #S_BOX 2
-                   1:(3,13,4,7,15,2,8,14,12,0,1,10,6,9,11,5),
-                   2:(0,14,7,11,10,4,13,1,5,8,12,6,9,3,2,15),
-                   3:(13,8,10,1,3,15,4,2,11,6,7,12,0,5,14,9) },
+              6:{ 0:(15,1,8,14,6,11,3,4,9,7,2,13,12,0,5,10),   #S_BOX 2
+                  1:(3,13,4,7,15,2,8,14,12,0,1,10,6,9,11,5),
+                  2:(0,14,7,11,10,4,13,1,5,8,12,6,9,3,2,15),
+                  3:(13,8,10,1,3,15,4,2,11,6,7,12,0,5,14,9) },
     
-              12:{ 0:(10,0,9,14,6,3,15,5,1,13,12,7,11,4,2,8),   #S_BOX 3
-                   1:(13,7,0,9,3,4,6,10,2,8,5,14,12,11,15,1),
-                   2:(13,6,4,9,8,15,3,0,11,1,2,12,5,10,14,7),
-                   3:(1,10,13,0,6,9,8,7,4,15,14,3,11,5,2,12) },
+             12:{ 0:(10,0,9,14,6,3,15,5,1,13,12,7,11,4,2,8),   #S_BOX 3
+                  1:(13,7,0,9,3,4,6,10,2,8,5,14,12,11,15,1),
+                  2:(13,6,4,9,8,15,3,0,11,1,2,12,5,10,14,7),
+                  3:(1,10,13,0,6,9,8,7,4,15,14,3,11,5,2,12) },
       
-              18:{ 0:(7,13,14,3,0,6,9,10,1,2,8,5,11,12,4,15),   #S_BOX 4
-                   1:(13,8,11,5,6,15,0,3,4,7,2,12,1,10,14,9),
-                   2:(10,6,9,0,12,11,7,13,15,1,3,14,5,2,8,4),
-                   3:(3,15,0,6,10,1,13,8,9,4,5,11,12,7,2,14) },
+             18:{ 0:(7,13,14,3,0,6,9,10,1,2,8,5,11,12,4,15),   #S_BOX 4
+                  1:(13,8,11,5,6,15,0,3,4,7,2,12,1,10,14,9),
+                  2:(10,6,9,0,12,11,7,13,15,1,3,14,5,2,8,4),
+                  3:(3,15,0,6,10,1,13,8,9,4,5,11,12,7,2,14) },
       
-              24:{ 0:(2,12,4,1,7,10,11,6,8,5,3,15,13,0,14,9),   #S_BOX 5
-                   1:(14,11,2,12,4,7,13,1,5,0,15,10,3,9,8,6),
-                   2:(4,2,1,11,10,13,7,8,15,9,12,5,6,3,0,14),
-                   3:(11,8,12,7,1,14,2,13,6,15,0,9,10,4,5,3) },
+             24:{ 0:(2,12,4,1,7,10,11,6,8,5,3,15,13,0,14,9),   #S_BOX 5
+                  1:(14,11,2,12,4,7,13,1,5,0,15,10,3,9,8,6),
+                  2:(4,2,1,11,10,13,7,8,15,9,12,5,6,3,0,14),
+                  3:(11,8,12,7,1,14,2,13,6,15,0,9,10,4,5,3) },
       
              30:{ 0:(12,1,10,15,9,2,6,8,0,13,3,4,14,7,5,11),   #S_BOX 6
                   1:(10,15,4,2,7,12,9,5,6,1,13,14,0,11,3,8),
@@ -107,13 +107,10 @@ class des:
 
              
     PERM_TABLA = { 0:15,  1:6,   2:19,  3:20,  4:28,  5:11,  6:27,  7:16,
-                       8:0,   9:14, 10:22, 11:25, 12:4,  13:17, 14:30, 15:9,
-                      16:1,  17:7,  18:23, 19:13, 20:31, 21:26, 22:2,  23:8,
-                      24:18, 25:12, 26:29, 27:5,  28:21, 29:10, 30:3,  31:24  }
-    
-    def __init__(self):
-        print("CONSTRUCTOR")
-
+                   8:0,   9:14, 10:22, 11:25, 12:4,  13:17, 14:30, 15:9,
+                  16:1,  17:7,  18:23, 19:13, 20:31, 21:26, 22:2,  23:8,
+                  24:18, 25:12, 26:29, 27:5,  28:21, 29:10, 30:3,  31:24  }
+        
     #s ->(string) mensaje + bits de relleno. Regresa list de strings, c/u = c/letra del msg en su representación binaria.
     def stringTobits(self, s): 
         res = []
@@ -134,14 +131,13 @@ class des:
     def faltaRelleno(self, msg):
         lets = 0
         letsXblq = self.TAM_BLQ / 8
-        for w in msg:            
-            for l in w:
-                lets += 1
-            if lets % letsXblq == 0: #Regresa 0 si es múltiplo del tamaño de bloque y no necesita rellenarse, SINO regresa x (1<x<7) 
-                return 0
-            else:
-                rell = letsXblq - (lets % letsXblq)
-        return rell
+        for l in msg:
+            lets += 1
+        if lets % letsXblq == 0: #Regresa 0 si es múltiplo del tamaño de bloque y no necesita rellenarse, SINO regresa x (1<x<7) 
+            return 0
+        else:
+            rell = letsXblq - (lets % letsXblq)
+            return rell
 
     '''
     msg -> mensaje del usuario(string). faltantes -> cant faltante(entero). Regresa msg(como string) concatenado a chars de relleno (ver PKCS#5)
@@ -162,6 +158,13 @@ class des:
         elif faltantes == 7:
             return msg+'7777777'
 
+    #msg -> mensaje desencriptado(string).Regresa msg sin el patrón de relleno(como string) 
+    def desrellenar(self,msg):
+        for i in range(8):
+            if i != 0:
+                if msg[len(msg)-1] == str(i) and msg[len(msg)-i] == str(i):                    
+                    return msg[:(len(msg)-i)]
+        return msg
     
     def bloques64( self, part ): #part -> list de strings de len()=8 (c/u = 1 caracter del msg como octeto). Regresa list de strings con len()=64
         bloque=''
@@ -291,7 +294,7 @@ class des:
         ri=[]                          #ri es para mantener Ri-1
         Ri=[]                          #Ri se usará en las iteraciones siguientes a la primera
         Li=[]                          #Li se usará en las iteraciones siguientes a la primera
-        pi = pInicial(m)               #permutar con IP y obtener blq 64bits
+        pi = self.pInicial(m)               #permutar con IP y obtener blq 64bits
         L0 = pi[:int(len(pi)/2)]       #dividir en blq inicial L0 de 32bits
         R0 = pi[int(len(pi)/2):]       #dividir en blq inicial R0 de 32bits
         while ronda < self.N_RONDAS:        #i desde 1 a 16
@@ -303,15 +306,15 @@ class des:
                 ri = R0                #guardar en ri -> Ri-1 (R0 al inicio es Ri-1)                ecuación 7.4
                 del L0
                 del R0
-            e = expansion(ri)          #expansión de R0|Ri de 32bits a 48bits                       2.4.1
-            x = xor( e, k[ronda] )     #aplicar xor entre e y k de 48bits                           2.4.2
-            s = sustitucion(x)         #sustituir blq de 48bits por 32bits usando sboxes1-8         2.4.3 y 2.4.4
-            f = permutacion(s)         #permutar blq 32bits y obtener f(Ri-1, Ki)                   2.4.5
-            Ri = xor( li, f )          #guardar Ri -> Li-1 xor f(Ri-1, Ki)(xor 32bits)(li es Li-1)  ecuación 7.5
+            e = self.expansion(ri)          #expansión de R0|Ri de 32bits a 48bits                       2.4.1
+            x = self.xor( e, k[ronda] )     #aplicar xor entre e y k de 48bits                           2.4.2
+            s = self.sustitucion(x)         #sustituir blq de 48bits por 32bits usando sboxes1-8         2.4.3 y 2.4.4
+            f = self.permutacion(s)         #permutar blq 32bits y obtener f(Ri-1, Ki)                   2.4.5
+            Ri = self.xor( li, f )          #guardar Ri -> Li-1 xor f(Ri-1, Ki)(xor 32bits)(li es Li-1)  ecuación 7.5
             Li = ri                    #aplicar Li = Ri-1 (el intercambio para la siguiente ronda)  Fig. 7.9
             ronda += 1                 #pasar a la siguiente ronda y seguir con otro key
-        i = intercambiarBloques(Li,Ri) #intercambiar últimos bloques y unirlos en uno de 64bits
-        return pFinal(i)               #permutar con IP inversa y obtener encriptación de 64bits
+        i = self.intercambiarBloques(Li,Ri) #intercambiar últimos bloques y unirlos en uno de 64bits
+        return self.pFinal(i)               #permutar con IP inversa y obtener encriptación de 64bits
 
     #hx ->(string) msg|key en hexadecimal. Regresa list de strings, c/u = c/par letras de hx(1octeto) en representación binaria.
     def hexTobin(self, hx):
@@ -356,7 +359,7 @@ class des:
         ri=[]                          #ri es para mantener Ri-1
         Ri=[]                          #Ri se usará en las iteraciones siguientes a la primera
         Li=[]                          #Li se usará en las iteraciones siguientes a la primera
-        pi = pInicial(m)               #permutar con IP y obtener blq 64bits
+        pi = self.pInicial(m)               #permutar con IP y obtener blq 64bits
         L0 = pi[:int(len(pi)/2)]       #dividir en blq inicial L0 de 32bits
         R0 = pi[int(len(pi)/2):]       #dividir en blq inicial R0 de 32bits
         while ronda > -1:              #i desde 16 a 1
@@ -368,115 +371,69 @@ class des:
                 ri = R0                #guardar en ri -> Ri-1 (R0 al inicio es Ri-1)                ecuación 7.4
                 del L0
                 del R0
-            e = expansion(ri)          #expansión de R0|Ri 32bits  a 48bits                         2.4.1
-            x = xor( e, k[ronda] )     #aplicar xor a blq 48bits con k 48bits                       2.4.2
-            s = sustitucion(x)         #sustituir blq 48bits por 32bits con respectiva sbox         2.4.3 y 2.4.4
-            f = permutacion(s)         #permutar blq 32bits a otro igual                            2.4.5
-            Ri = xor( li, f )          #guardar Ri -> Li-1 xor f(Ri-1, Ki). (li es Li-1)            ecuación 7.5
+            e = self.expansion(ri)          #expansión de R0|Ri 32bits  a 48bits                         2.4.1
+            x = self.xor( e, k[ronda] )     #aplicar xor a blq 48bits con k 48bits                       2.4.2
+            s = self.sustitucion(x)         #sustituir blq 48bits por 32bits con respectiva sbox         2.4.3 y 2.4.4
+            f = self.permutacion(s)         #permutar blq 32bits a otro igual                            2.4.5
+            Ri = self.xor( li, f )          #guardar Ri -> Li-1 xor f(Ri-1, Ki). (li es Li-1)            ecuación 7.5
             Li = ri                    #aplicar Li = Ri-1 (el intercambio para la siguiente ronda)  Fig. 7.9
             ronda -= 1                 #pasar a la siguiente ronda y seguir con otro key
-        i = intercambiarBloques(Li,Ri) #intercambiar últimos bloques y unirlos en uno de 64bits
-        return pFinal(i)               #permutar con IP inversa y obtener encriptación de 64bits
+        i = self.intercambiarBloques(Li,Ri) #intercambiar últimos bloques y unirlos en uno de 64bits
+        return self.pFinal(i)               #permutar con IP inversa y obtener encriptación de 64bits
 
-    def generarKeys(self,word):#word -> string = password. Regresa list con 16 keys (strings len()=48 c/u).
-        if len(word) < 8:
-            return -1
-        else:
+
+
+    '''MÉTODOS CON TODA LA FUNCIONALIDAD PARA IMPLEMENTAR EL ALGORITMO, ES LO QUE NECESITAS PARA ENCRIPTAR CON DES'''
+    ''' TODOS LOS METODOS ANTERIORES SON PARA USO INTERNO DE LA CLASE'''
+    '''
+    word -> string = password. Regresa -1 si word no es valida o tupla. Donde: 
+    tupla[0]= word/password <- hexadecimal (Es para poder compartirla y que otro pueda desencriptar, solo opcionalmente)
+    tupla[1]=list con 16 keys (strings len()=48 c/u).
+    '''
+    def genKeys(self,word):
+        if len(word) == 16:
+            k = self.keyHextoBin(word)
+            return ( k,self.calcularClaves(k))         
+        elif len(word) == 8:
             kHex = ""
             wBin = self.stringTobits(word)
             for s in wBin:
                 kHex += str( hex( int(s,2) ) )[2:]
             k = self.keyHextoBin(kHex)
-            return self.calcularClaves(k)
-
-    def crypt(self,msg):
-        return ""
-    
-    def decrypt(self,msg):
-        return""
-
-
-###
-##ENCRIPTAR
-###
-'''
-print("ENCRIPTAR")
-print("# # # # # # # # # # #")
-kHex = input("Ingrese una clave en hexadecimal: ")
-while len(kHex) != 16:
-    print("***La clave debe contener 16 caracteres en hexadecimal\n")
-    kHex = input("Ingrese una clave en hexadecimal: ")
-k = keyHextoBin(kHex)
-keys = calcularClaves(k)
-print(" Ki len: ",len(keys))
-m=input("Ingrese un mensaje [Salir = -9999]: ")
-while m != '-9999':
-    mEnc = []
-    h = ''
-    f = faltaRelleno(m)
-    if f != 0:
-        m=rellenar(m,f)
-    mbin=stringTobits(m)
-    blq64 = bloques64(mbin)
-    for blq in blq64:
-        h += hex( int(blq,2) )[2:]
-        mEnc.append( encriptar(blq,keys) )
-    cr=''
-    mcry=''
-    for bq in mEnc:
-        for b in bq:
-            cr += str(b)
-        mcry += str( hex( int(cr,2) ) )[2:]
+            return ( k,self.calcularClaves(k))            
+        elif len(word) < 8:
+            return -1
+        
+    #m -> mensaje a encriptar(string). keys-> list con 16 keys (strings len()=48 c/u). Regresa mensaje encriptado en hexadecimal (string).
+    def crypt(self,m,keys):
+        mEnc = []
+        h = ''
+        f = self.faltaRelleno(m)
+        if f != 0:
+            m=self.rellenar(m,f)
+        mbin=self.stringTobits(m)
+        blq64 = self.bloques64(mbin)
+        for blq in blq64:
+            h += hex( int(blq,2) )[2:]
+            mEnc.append( self.encriptar(blq,keys) )
         cr=''
-    print("mensaje en HEXADEC: ",h  )    
-    print("mensaje Encriptado: ", mcry)
-    print()
-    print("# # # # # # # # # # #")
-    kHex = input("Ingrese una clave en hexadecimal: ")
-    while len(kHex) != 16:
-        print("***La clave debe contener 16 caracteres en hexadecimal\n")
-        kHex = input("Ingrese una clave en hexadecimal: ")
-    k = keyHextoBin(kHex)
-    keys = calcularClaves(k)
-    print(" Ki len: ",len(keys))
-    m=input("Ingrese un mensaje [Salir = -9999]: ")
-'''
-
-'''
-###
-##DESENCRIPTAR
-###
-print("DESENCRIPTAR")
-print("# # # # # # # # # # #")
-kHex = input("Ingrese una clave en hexadecimal: ")
-while len(kHex) != 16:
-    print("***La clave debe contener 16 caracteres en hexadecimal\n")
-    kHex = input("Ingrese una clave en hexadecimal: ")
-k2 = keyHextoBin(kHex)
-keys2 = calcularClaves(k2)
-print(" Ki len: ",len(keys2))
-m=input("Ingrese un mensaje en hexadecimal [Salir = -9999]: ")
-while m != '-9999':
-    mDes = []
-    mbin = []
-    mbin=hexTobin(m)
-    blq64 = bloques64(mbin)
-    for blq in blq64:
-        mDes.append( desencriptar(blq,keys2) )
-    msg=''
-    for blqB in mDes:
-        msg += binToStr(blqB)
-    print("mensaje en HEXADEC: ",m  )    
-    print("mensaje Desencriptado: ", msg)
-    print("")
-    print("DESENCRIPTAR")
-    print("# # # # # # # # # # #")
-    kHex = input("Ingrese una clave en hexadecimal: ")
-    while len(kHex) != 16:
-        print("***La clave debe contener 16 caracteres en hexadecimal\n")
-        kHex = input("Ingrese una clave en hexadecimal: ")
-    k2 = keyHextoBin(kHex)
-    keys2 = calcularClaves(k2)
-    print(" Ki len: ",len(keys2))
-    m=input("Ingrese un mensaje en hexadecimal [Salir = -9999]: ")
-'''
+        mcry=''
+        for bq in mEnc:
+            for b in bq:
+                cr += str(b)
+            mcry += str( hex( int(cr,2) ) )[2:]
+            cr=''
+        return mcry
+    
+    #m -> mensaje a desencriptar(string). keys-> list con 16 keys (strings len()=48 c/u). Regresa mensaje desencriptado (string-texto plano).
+    def decrypt(self,m,keys):
+        mDes = []
+        mbin = []
+        mbin=self.hexTobin(m)
+        blq64 = self.bloques64(mbin)
+        for blq in blq64:
+            mDes.append( self.desencriptar(blq,keys) )
+        msg=''
+        for blqB in mDes:
+            msg += self.binToStr(blqB)
+        return self.desrellenar(msg)
