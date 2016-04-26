@@ -406,6 +406,8 @@ class des:
         
     #m -> mensaje a encriptar(string). keys-> list con 16 keys (strings len()=48 c/u). Regresa mensaje encriptado en hexadecimal (string).
     def crypt(self,m,keys):
+        if(len(keys) != 16):
+            return "Error: 16 keys invalidas"
         mEnc = []
         h = ''
         f = self.faltaRelleno(m)
@@ -427,6 +429,8 @@ class des:
     
     #m -> mensaje a desencriptar(string). keys-> list con 16 keys (strings len()=48 c/u). Regresa mensaje desencriptado (string-texto plano).
     def decrypt(self,m,keys):
+        if(len(keys) != 16):
+            return "Error: 16 keys invalidas"
         mDes = []
         mbin = []
         mbin=self.hexTobin(m)

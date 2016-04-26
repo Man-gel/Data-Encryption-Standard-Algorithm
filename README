@@ -9,8 +9,9 @@ Para utilizar esta clase sólo copia el archivo des.py en el directorio de tu pr
 
     d = des.des()
     k = d.genKeys(pw)
-    cMsg = d.crypt(msg,k[1])
-    dMsg = d.decrypt(cMsg,k[1])
+    if k != -1:
+        cMsg = d.crypt(msg,k[1])
+        dMsg = d.decrypt(cMsg,k[1])
 
 Donde:
 'd' es la referencia al objeto creado, 'k' es una tupla de dos valores: k[0] es la palabra(password) en hexadecimal utilizada por DES para generar 16 subclaves. k[1] es una lista con las 16 subclaves de longitud 48; cMsg es el mensaje encriptado en hexadecimal y dMsg es el mensaje desencriptado en texto plano.
@@ -18,7 +19,7 @@ Donde:
 'msg' en crypt() es el mensaje en texto plano que será encriptado con la lista de 16 subclaves en k[1].
 'cMsg' en decrypt() es el mensaje en hexadecimal que será desencriptado con la lista de 16 subclaves en k[1].
 'Para' desencriptar un mensaje se necesita la misma clave de 64 bits o la misma lista de 16 subclaves utilizada durante la encriptación.
-
+NOTA: Se recomienda validar el valor regresado por genKeys() para saber que las subclaves se generaron correctamente.
 ##########################################################################
 This program provides a way of implementing DES algorithm in python3 without use of framework/library outside Python standard libraries. The code provides all functionality for each of the 16 Feistel rounds, generation of the 16 48-bits subkeys and finally crypting /decrypting plain/crypted text respectively.
 
@@ -28,8 +29,9 @@ If you want to use it in your project only must to copy des.py file in your proj
 
     d = des.des()
     k = d.genKeys(pw)
-    cMsg = d.crypt(msg,k[1])
-    dMsg = d.decrypt(cMsg,k[1])
+    if k != -1:
+        cMsg = d.crypt(msg,k[1])
+        dMsg = d.decrypt(cMsg,k[1])
 
 Where:
 'd' is a reference to a created object, 'k' is a tuple with 2 values: k[0] is the 'word'(or password) passed as argument to genKeys() function but switched to hex representation (it is only for purpose of sharing, so be careful, is in hex format but it isn't mean secure), k[1] is a list containing 16 48-bits subkeys; 'cMsg' is the returned value of crypt() function and refers to the crypted message returned by DES algorithm. In the same way, dMsg is the returned value of decrypt() function and refers to the decrypted message returned by DES algorithm.
@@ -37,7 +39,7 @@ Where:
 genKeys() takes one parameter: a string with length=8(plain-text) or length=16(in hex-format if you had used k[0] as sharing value).
 crypt() takes two parameters: plain-text message that will be crypted, a list of 16 48-bits subkeys (as a 16 strings list).
 decrypt() takes two parameters: hex-format crypted message that will be decrypted, a list of 16 48-bits subkeys (as a 16 strings list).
-
+NOTE: You must to validate the value returned by genKeys() in case of an error in calculation of 16 subkeys.
         
     
 ###########################################################################    
