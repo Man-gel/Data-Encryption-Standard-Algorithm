@@ -174,7 +174,7 @@ class des:
             for bit in range( len(part[oc]) ):
                 bloque += part[oc][bit]
                 bits += 1
-                if bits == 64:
+                if bits == self.TAM_BLQ:
                     blq64.append(bloque)
                     bloque=''
                     bits = 0
