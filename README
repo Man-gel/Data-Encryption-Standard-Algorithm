@@ -6,6 +6,7 @@ Este programa proporciona una implementación del algoritmo de encriptación DES
 Para utilizar esta clase sólo copia el archivo des.py en el directorio de tu proyecto, entonces puedes crear un objeto de la clase 'des' y llamar a sus tres funciones útiles como el ejemplo que sigue. 
 
     #!/usr/bin/python3
+    import des
 
     d = des.des()
     k = d.genKeys(pw)
@@ -26,6 +27,7 @@ This program provides a way of implementing DES algorithm in python3 without use
 If you want to use it in your project only must to copy des.py file in your project's folder and then create an object of 'des' class to get access to its 3 useful functions like follows:
 
     #!/usr/bin/python3
+    import des
 
     d = des.des()
     k = d.genKeys(pw)
