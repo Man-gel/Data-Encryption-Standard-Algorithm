@@ -401,7 +401,7 @@ class des:
                 kHex += str( hex( int(s,2) ) )[2:]
             k = self.keyHextoBin(kHex)
             return ( k,self.calcularClaves(k))            
-        elif len(word) < 8:
+        else:
             return -1
         
     #m -> mensaje a encriptar(string). keys-> list con 16 keys (strings len()=48 c/u). Regresa mensaje encriptado en hexadecimal (string).
