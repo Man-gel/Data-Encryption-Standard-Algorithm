@@ -165,8 +165,8 @@ class des:
                 if msg[len(msg)-1] == str(i) and msg[len(msg)-i] == str(i):                    
                     return msg[:(len(msg)-i)]
         return msg
-    
-    def __bloques64( self, part ): #part -> list de strings de len()=8 (c/u = 1 caracter del msg como octeto). Regresa list de strings con len()=64
+    #part -> list de strings de len()=8 (c/u = 1 caracter del msg como octeto). Regresa list de strings con len()=64
+    def __bloques64( self, part ): 
         bloque=''
         bits=0
         blq64 = []
@@ -178,7 +178,7 @@ class des:
                     blq64.append(bloque)
                     bloque=''
                     bits = 0
-        return blq64
+        return tuple(blq64)
 
     def __calcularClaves(self, k): #k -> string o list de chars len()=64, key original. Regresa list con 16 keys (strings len()=48 c/u).
         kList= []
@@ -208,19 +208,19 @@ class des:
             for i in range( len(self.__PC2_TABLA) ):
                 Ki.append( kConc[self.__PC2_TABLA[i]] )
             kList.append(Ki)
-        return kList
+        return tuple(kList)
 
     def __pInicial(self, blq): #blq -> string de len()=64 con '0'|'1'. Regresa list de enteros con 0 | 1 de len()=64
         blqPerm = []
         for b in range( len(blq) ):
             blqPerm.append(int( blq[ self.__IP_TABLA[b] ] ))        
-        return blqPerm
+        return tuple(blqPerm)
 
     def __pFinal(self, blq): #blq -> string de len()=64 con '0'|'1'. Regresa list de enteros con 0 | 1 de len()=64
         blqPerm = []
         for b in range( len(blq) ):
             blqPerm.append(int( blq[ self.__IP_INV_TABLA[b] ] ))        
-        return blqPerm
+        return tuple(blqPerm)
 
     def __expansion(self, blq): #blq ->  list = 1 bloque de 32 bits(como enteros), Regresa list de 48 bits (como enteros)    
         blqExp=[]
@@ -233,7 +233,7 @@ class des:
             else:
                 blqExp.append( blq[b] )
         blqExp.append( blq[0] )
-        return blqExp
+        return tuple(blqExp)
 
     #bits -> list de enteros(1|0). k -> list o string solo con chars '0'|'1'.Siempre con len(bits). Regresa list de enteros 0|1.
     def __xor(self, bits, k): 
@@ -243,7 +243,7 @@ class des:
                 _xor.append(1)
             else:
                 _xor.append(0)
-        return _xor
+        return tuple(_xor)
 
     def __sustitucion(self, bits): #bits -> list de enteros 0 | 1 con len()=48. Regresa list con len()=32 con enteros 0| 1
         bitSust = []
@@ -268,13 +268,13 @@ class des:
             for nb in nbit:
                 bitSust.append( int(nb) )        
             cont += 6        
-        return bitSust
+        return tuple(bitSust)
 
     def __permutacion(self, blq): #blq -> list de len()=32 con enteros 1 | 0. Regresa una estructura igual permutada.
         bPerm = []
         for b in range( len(blq) ):
             bPerm.append( blq[ self.__PERM_TABLA[b] ] )
-        return bPerm
+        return tuple(bPerm)
 
     #blqL, blqR -> list len()=32 c/u (enteros).Regresa string len()=64 con bloques intercambiados
     def __intercambiarBloques(self, blqL, blqR): 
@@ -333,12 +333,13 @@ class des:
     def __binToStr(self, b):#b ->  list de enteros len()=64. Regresa string equivalente a las letras de cada octeto de la lista.
         w=''
         oc=''
+        ch = ''
         for i in range( len(b) ):        
             oc += str( b[i] )
             if i > 0 and (i+1)%8 == 0:
                 ch=str( int(oc,2) )
                 w += chr( int(ch) )
-                oc=''
+                oc=''                
         return w
 
     def __keyHextoBin(self, k): #k -> string con la clave en hexadecimal. Regresa string len()=64 (representación binaria de la clave).
@@ -374,7 +375,7 @@ class des:
                 del R0
             e = self.__expansion(ri)          #expansión de R0|Ri 32bits  a 48bits                         2.4.1
             x = self.__xor( e, k[ronda] )     #aplicar xor a blq 48bits con k 48bits                       2.4.2
-            s = self.__sustitucion(x)          #sustituir blq 48bits por 32bits con respectiva sbox         2.4.3 y 2.4.4
+            s = self.__sustitucion(x)         #sustituir blq 48bits por 32bits con respectiva sbox         2.4.3 y 2.4.4
             f = self.__permutacion(s)         #permutar blq 32bits a otro igual                            2.4.5
             Ri = self.__xor( li, f )          #guardar Ri -> Li-1 xor f(Ri-1, Ki). (li es Li-1)            ecuación 7.5
             Li = ri                           #aplicar Li = Ri-1 (el intercambio para la siguiente ronda)  Fig. 7.9
