@@ -111,32 +111,31 @@ class des:
                     16:1,  17:7,  18:23, 19:13, 20:31, 21:26, 22:2,  23:8,
                     24:18, 25:12, 26:29, 27:5,  28:21, 29:10, 30:3,  31:24  }
         
-    #s ->(string) mensaje + bits de relleno. Regresa list de strings, c/u = c/letra del msg en su representación binaria.
+    #s ->(string) mensaje + bits de relleno. Regresa sequencia de strings, c/u = c/letra del msg en su representación binaria.
     def __stringTobits(self, s): 
         res = []
         mask='00000000'
+        bUnmasked = ''
+        bMasked = ''
         for c in s:
-            bUnmasked= bin( ord(c) )[2:]
+            bUnmasked= str( bin( ord(c) ) )[2:]
             bMasked=mask[ len(bUnmasked): ] + bUnmasked
             res.append(bMasked)
-        return res
+        return tuple(res)
 
     '''
     Según PKCS#5 si faltan n bytes se debe comletar con el valor n, n veces el octeto.
     Las posibilidades van desde 1 a 7 que en decimal van desde 49 a 55 (ASCII/UNICODE).
     Si n = 1 el bloque se completaría con '1' =>(49 en dec, 00110001 en bin), si n=2 el boque se completaría con '22' =>(5050 en dec, 0011001000110010 en bin), etc.
-    '''
-    
+    '''    
     #msg ->(string) mensaje del usuario. Regresa(entero) cant de caracteres que faltan para que len(msg) sea múltiplo de 8    
     def __faltaRelleno(self, msg):
         lets = 0
         letsXblq = self.__TAM_BLQ / 8
-        for l in msg:
-            lets += 1
-        if lets % letsXblq == 0: #Regresa 0 si es múltiplo del tamaño de bloque y no necesita rellenarse, SINO regresa x (1<x<7) 
+        if len(msg) % letsXblq == 0:#if lets % letsXblq == 0: #Regresa 0 si es múltiplo del tamaño de bloque y no necesita rellenarse, SINO regresa x (1<x<7) 
             return 0
         else:
-            rell = letsXblq - (lets % letsXblq)
+            rell = letsXblq - (len(msg) % letsXblq)
             return rell
 
     '''
@@ -165,7 +164,7 @@ class des:
                 if msg[len(msg)-1] == str(i) and msg[len(msg)-i] == str(i):                    
                     return msg[:(len(msg)-i)]
         return msg
-    #part -> list de strings de len()=8 (c/u = 1 caracter del msg como octeto). Regresa list de strings con len()=64
+    #part -> sequencia de strings de len()=8 (c/u = 1 caracter del msg como octeto). Regresa sequencia de strings con len()=64
     def __bloques64( self, part ): 
         bloque=''
         bits=0
@@ -180,7 +179,7 @@ class des:
                     bits = 0
         return tuple(blq64)
 
-    def __calcularClaves(self, k): #k -> string o list de chars len()=64, key original. Regresa list con 16 keys (strings len()=48 c/u).
+    def __calcularClaves(self, k): #k -> string o sequencia de chars len()=64, key original. Regresa sequencia con 16 keys (strings len()=48 c/u).
         kList= []
         kPerm = []
         izq=2
@@ -210,19 +209,19 @@ class des:
             kList.append(Ki)
         return tuple(kList)
 
-    def __pInicial(self, blq): #blq -> string de len()=64 con '0'|'1'. Regresa list de enteros con 0 | 1 de len()=64
+    def __pInicial(self, blq): #blq -> string de len()=64 con '0'|'1'. Regresa sequencia de enteros con 0 | 1 de len()=64
         blqPerm = []
         for b in range( len(blq) ):
             blqPerm.append(int( blq[ self.__IP_TABLA[b] ] ))        
         return tuple(blqPerm)
 
-    def __pFinal(self, blq): #blq -> string de len()=64 con '0'|'1'. Regresa list de enteros con 0 | 1 de len()=64
+    def __pFinal(self, blq): #blq -> string de len()=64 con '0'|'1'. Regresa sequencia de enteros con 0 | 1 de len()=64
         blqPerm = []
         for b in range( len(blq) ):
             blqPerm.append(int( blq[ self.__IP_INV_TABLA[b] ] ))        
         return tuple(blqPerm)
 
-    def __expansion(self, blq): #blq ->  list = 1 bloque de 32 bits(como enteros), Regresa list de 48 bits (como enteros)    
+    def __expansion(self, blq): #blq ->  sequencia = 1 bloque de 32 bits(como enteros), Regresa sequencia de 48 bits (como enteros)    
         blqExp=[]
         blqExp.append( blq[-1] )
         for b in range( len(blq) ):
@@ -235,17 +234,17 @@ class des:
         blqExp.append( blq[0] )
         return tuple(blqExp)
 
-    #bits -> list de enteros(1|0). k -> list o string solo con chars '0'|'1'.Siempre con len(bits). Regresa list de enteros 0|1.
+    #bits -> sequencia de enteros(1|0). k -> sequencia o string solo con chars '0'|'1'.Siempre con len(bits). Regresa sequencia de enteros 0|1.
     def __xor(self, bits, k): 
-        _xor = []
+        _xor = []        
         for i in range(len(bits)):
-            if bits[i] == 0 and str(k[i]) == '1' or bits[i] == 1 and str(k[i]) == '0':
+            if int(bits[i]) == 0 and str(k[i]) == '1' or int(bits[i]) == 1 and str(k[i]) == '0':
                 _xor.append(1)
             else:
                 _xor.append(0)
         return tuple(_xor)
 
-    def __sustitucion(self, bits): #bits -> list de enteros 0 | 1 con len()=48. Regresa list con len()=32 con enteros 0| 1
+    def __sustitucion(self, bits): #bits -> sequencia de enteros 0 | 1 con len()=48. Regresa sequencia con len()=32 con enteros 0| 1
         bitSust = []
         mask = '0000'
         cont = 0
@@ -270,13 +269,13 @@ class des:
             cont += 6        
         return tuple(bitSust)
 
-    def __permutacion(self, blq): #blq -> list de len()=32 con enteros 1 | 0. Regresa una estructura igual permutada.
+    def __permutacion(self, blq): #blq -> sequencia de len()=32 con enteros 1 | 0. Regresa una estructura igual permutada.
         bPerm = []
         for b in range( len(blq) ):
             bPerm.append( blq[ self.__PERM_TABLA[b] ] )
         return tuple(bPerm)
 
-    #blqL, blqR -> list len()=32 c/u (enteros).Regresa string len()=64 con bloques intercambiados
+    #blqL, blqR -> sequencia len()=32 c/u (enteros).Regresa string len()=64 con bloques intercambiados
     def __intercambiarBloques(self, blqL, blqR): 
         blqExch = ''
         for r in blqR:
@@ -287,7 +286,7 @@ class des:
 
 
     ''' 
-    m -> bloque de mensaje, string len()=64. k -> claves de c/ronda (list de 16 strings len()=48 - Ki -). Regresa bloque encriptado (list de enteros 0|1 len()=64 ).
+    m -> bloque de mensaje, string len()=64. k -> claves de c/ronda (sequencia de 16 strings len()=48 - Ki -). Regresa bloque encriptado (sequencia de enteros 0|1 len()=64 ).
     '''
     def __encriptar(self, m, k):    
         ronda = 0
@@ -317,29 +316,33 @@ class des:
         i = self.__intercambiarBloques(Li,Ri) #intercambiar últimos bloques y unirlos en uno de 64bits
         return self.__pFinal(i)               #permutar con IP inversa y obtener encriptación de 64bits
 
-    #hx ->(string) msg|key en hexadecimal. Regresa list de strings, c/u = c/par letras de hx(1octeto) en representación binaria.
-    def __hexTobin(self, hx):
-        toHex = []
+    #hx ->(string) msg|key en hexadecimal. Regresa sequencia de strings, c/u = c/par letras de hx(1octeto) en representación binaria.
+    def __hexTobin(self, hx):        
+        toBin = []
         mask='00000000'
         x=0
-        while x < len(hx):
-            h=''
-            B = str( bin( int( (str(hx[x:x+2])),16 ) ) )[2:]
-            h = mask[ len(B):]+B
+        h=''
+        B=''
+        while x < len(hx):            
+            B = str( bin( int( hx[x:x+2],16 ) ) )[2:]
+            if B == mask:
+                h = mask
+            else:
+                h = mask[ len(B):]+B
             x += 2
-            toHex.append(h)
-        return toHex
+            toBin.append(h)
+        return tuple(toBin)
 
-    def __binToStr(self, b):#b ->  list de enteros len()=64. Regresa string equivalente a las letras de cada octeto de la lista.
-        w=''
-        oc=''
+    def __binToStr(self, b):#b ->  sequencia de enteros len()=64. Regresa string equivalente a las letras de cada octeto de la lista.
+        w=""
+        oc=""
         ch = ''
         for i in range( len(b) ):        
             oc += str( b[i] )
             if i > 0 and (i+1)%8 == 0:
                 ch=str( int(oc,2) )
                 w += chr( int(ch) )
-                oc=''                
+                oc=""                
         return w
 
     def __keyHextoBin(self, k): #k -> string con la clave en hexadecimal. Regresa string len()=64 (representación binaria de la clave).
@@ -353,7 +356,7 @@ class des:
         return kBin
     
     ''' 
-    m -> bloque de mensaje encriptado, string len()=64. k -> claves de c/ronda (list de 16 strings len()=48 - Ki -). Regresa bloque desencriptado (list de enteros 0|1 len()=64 ).
+    m -> bloque de mensaje encriptado, string len()=64. k -> claves de c/ronda (sequencia de 16 strings len()=48 - Ki -). Regresa bloque desencriptado (sequencia de enteros 0|1 len()=64 ).
     '''    
     def __desencriptar(self, m,k):
         ronda = 15
@@ -390,7 +393,7 @@ class des:
     '''
     word -> string = password. Regresa -1 si word no es valida o tupla. Donde: 
     tupla[0]= word/password <- hexadecimal (Es para poder compartirla y que otro pueda desencriptar, solo opcionalmente)
-    tupla[1]=list con 16 keys (strings len()=48 c/u).
+    tupla[1]=sequencia con 16 keys (strings len()=48 c/u).
     '''
     def genKeys(self,word):
         if len(word) == 16:
@@ -407,40 +410,41 @@ class des:
         else:
             return -1
         
-    #m -> mensaje a encriptar(string). keys-> list con 16 keys (strings len()=48 c/u). Regresa mensaje encriptado en hexadecimal (string).
+    #m -> mensaje a encriptar(string). keys-> sequencia con 16 keys (strings len()=48 c/u). Regresa mensaje encriptado en hexadecimal (string).
     def crypt(self,m,keys):
         if(len(keys) != 16):
             return "Error: 16 keys invalidas"
         mEnc = []
-        h = ''
+        cr=""
+        mcry=""
         f = self.__faltaRelleno(m)
         if f != 0:
             m=self.__rellenar(m,f)
         mbin=self.__stringTobits(m)
         blq64 = self.__bloques64(mbin)
         for blq in blq64:
-            h += hex( int(blq,2) )[2:]
-            mEnc.append( self.__encriptar(blq,keys) )
-        cr=''
-        mcry=''
+            mEnc.append( self.__encriptar(blq,keys) )            
         for bq in mEnc:
-            for b in bq:
-                cr += str(b)
+            for bit in bq:
+                cr += str(bit)
+            if(cr[:8] == "00000000"):
+                mcry += "00"            
             mcry += str( hex( int(cr,2) ) )[2:]
-            cr=''
+            cr=""
         return mcry
     
-    #m -> mensaje a desencriptar(string). keys-> list con 16 keys (strings len()=48 c/u). Regresa mensaje desencriptado (string-texto plano).
+    '''
+    m -> mensaje a desencriptar(string) en hex. keys-> sequencia con 16 keys (strings len()=48 c/u). Regresa mensaje desencriptado (string-texto plano).
+    '''
     def decrypt(self,m,keys):
         if(len(keys) != 16):
             return "Error: 16 keys invalidas"
+        msg=""
         mDes = []
-        mbin = []
         mbin=self.__hexTobin(m)
         blq64 = self.__bloques64(mbin)
         for blq in blq64:
             mDes.append( self.__desencriptar(blq,keys) )
-        msg=''
         for blqB in mDes:
             msg += self.__binToStr(blqB)
         return self.__desrellenar(msg)
