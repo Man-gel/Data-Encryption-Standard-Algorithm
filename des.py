@@ -1,5 +1,4 @@
-#!/bin/python3
-
+#!/usr/bin/python
 '''
     This program provides a way of implementing DES algorithm in python3 
     without use of framework/library outside Python standard libraries.
@@ -417,20 +416,24 @@ class des:
         mEnc = []
         cr=""
         mcry=""
+        parHex=""
         f = self.__faltaRelleno(m)
         if f != 0:
             m=self.__rellenar(m,f)
         mbin=self.__stringTobits(m)
         blq64 = self.__bloques64(mbin)
         for blq in blq64:
-            mEnc.append( self.__encriptar(blq,keys) )            
+            mEnc.append( self.__encriptar(blq,keys) )
         for bq in mEnc:
             for bit in bq:
                 cr += str(bit)
-            if(cr[:8] == "00000000"):
-                mcry += "00"            
-            mcry += str( hex( int(cr,2) ) )[2:]
-            cr=""
+                if(len(cr) == 8):
+                    if(cr == "00000000"):
+                        mcry += "00"
+                    else:
+                        parHex=str( hex( int(cr,2) ) )[2:]
+                        mcry += ( "00"[len(parHex):] + parHex )
+                    cr=""
         return mcry
     
     '''
